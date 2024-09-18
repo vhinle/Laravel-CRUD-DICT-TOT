@@ -10,3 +10,57 @@ php artisan migrate:reset
 # Drop all tables and re-run all migrations
 php artisan migrate:fresh
 
+# Run all outstanding migrations
+php artisan migrate
+
+php artisan db:wipe
+
+
+# Migrating CSV
+
+# Create a new migration for importing data from a CSV file
+php artisan make:migration import_data_from_csv --table=table_name
+
+# Run the migration to import data from the CSV file
+php artisan migrate --path=/database/migrations/import_data_from_csv.php
+
+
+# Migrating CSV using migration script
+# BEGIN
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
+
+class ImportDataFromCsv extends Migration
+{
+    public function up()
+    {
+        Schema::create('table_name', function (Blueprint $table) {
+            $table->id();
+            $table->string('column1');
+            $table->string('column2');
+            // Add other columns as needed
+            $table->timestamps();
+        });
+
+        $file = database_path('migrations/data.csv');
+        $data = array_map('str_getcsv', file($file));
+        $header = array_shift($data);
+
+        foreach ($data as $row) {
+            $row = array_combine($header, $row);
+            DB::table('table_name')->insert($row);
+        }
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('table_name');
+    }
+}
+# END SCRIPT
+
+
+# Run migration with seeder
+php artisan migrate:fresh --seed 
