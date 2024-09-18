@@ -1,0 +1,8 @@
+Custom Helper 
+
+Manually create folder and file to write custom Helper
+Helper can be used anywhere
+Modify composer.json to recognize custom Helper
+Look for autoload in composer.json
+
+##run composer update
