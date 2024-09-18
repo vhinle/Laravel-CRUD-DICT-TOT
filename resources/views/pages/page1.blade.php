@@ -4,13 +4,33 @@
     <x-page-header pageTitle="Page 1" btnCaption="Action Button Page 1" class="bg-white" />
 
     <div class="wrapper wrapper-content">
-        <div class="middle-box text-center animated fadeInRightBig">
-            <h3 class="font-bold">This is page content</h3>
-            <div class="error-desc">
-                You can create here any grid layout you want. And any variation layout you imagine:) Check out
-                main dashboard and other site. It use many different layout.
-                <br /><a href="index.html" class="btn btn-primary m-t">Dashboard</a>
-            </div>
+
+        <div class="row">
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>TITLE</th>
+                        <th>DESCRIPTION</th>
+                        <th>RATING</th>
+                        <th>PUBLISHED</th>
+                        <th>DIRECTOR</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($data as $row)
+                        <tr>
+                            <td>{{ $row->id }}</td>
+                            <td>{{ $row->title }}</td>
+                            <td>{{ $row->decription }}</td>
+                            <td>{{ $row->star_rating }}</td>
+                            <td>{{ $row->date_published }}</td>
+                            <td>{{ $row->director }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
+
     </div>
 @endsection
