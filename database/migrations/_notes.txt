@@ -1,0 +1,12 @@
+# Create a new migration
+php artisan make:migration create_table_name --table=table_name
+
+# Rollback the last migration operation
+php artisan migrate:rollback
+
+# Rollback all migrations
+php artisan migrate:reset
+
+# Drop all tables and re-run all migrations
+php artisan migrate:fresh
+
