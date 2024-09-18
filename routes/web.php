@@ -1,9 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MovieController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -15,26 +16,54 @@ Route::get('/dashboard', function () {
 });
 
 # Pages
-Route::get('/page1', function () {
-    $data = DB::table('movies')->get();
-    return view('pages.page1', compact('data'));
-});
+Route::get('/page1', [MovieController::class, 'index']);
+Route::get('/add-movie-form', [MovieController::class, 'show_add_form']);
+Route::post('/add-movie', [MovieController::class, 'add_movie']);
 
-Route::get('/add-movies', function () {
+
+Route::post('/delete-movie/{id}', [MovieController::class, 'do_delete']);
+Route::get('/delete-movie/{id}', [MovieController::class, 'do_delete']);
+
+
+Route::get('/edit-movie-form/{id}', [MovieController::class, 'show_edit_form']);
+Route::post('/edit-movie/{id}', [MovieController::class, 'edit_movie']);
+
+// Route::get('/add-movie-form', function () {
+//     return view('pages.add-movie-form');
+// });
+
+
+Route::post('/add-movies', function (Request $request) {
 
     $query = DB::table('movies')
         ->insert([
-            'title' => 'Batman',
-            'decription' => 'Action, Suspense',
-            'star_rating' => 9.3,
-            'director' => "Warner Bros.",
-            'date_published' => '2024-01-02',
+            'title' => $request->input('title'),
+            'decription' => $request->input('description'),
+            'star_rating' => $request->input('star_rating'),
+            'director' => $request->input('director'),
+            'date_published' => $request->input('date_published'),
             'created_at' => now()
         ]);
 
-    if ($query)
-        echo 'Saved';
+    if ($query) {
+        return redirect(url('/page1'))->with('success', 'New Record Successfully Saved');
+    }
 });
+// Route::get('/add-movies', function () {
+
+//     $query = DB::table('movies')
+//         ->insert([
+//             'title' => 'Batman',
+//             'decription' => 'Action, Suspense',
+//             'star_rating' => 9.3,
+//             'director' => "Warner Bros.",
+//             'date_published' => '2024-01-02',
+//             'created_at' => now()
+//         ]);
+
+//     if ($query)
+//         echo 'Saved';
+// });
 
 Route::get('/delete-movie', function () {
 
@@ -88,6 +117,26 @@ Route::get('/add-book', function () {
     if ($query)
         echo 'New Record Successfully Saved';
 });
+
+Route::get('/update-book/{id}', function ($id) {
+
+    $query = DB::table('books')
+        ->where('id', $id)
+        ->update([
+            'title' => fake()->sentence(),
+            'description' => fake()->text(),
+            'country_id' => fake()->numberBetween(1, 10),
+            'stocks' => fake()->numberBetween(1, 500),
+            'amount' => fake()->randomFloat(2, 1, 1000),
+            'photo' => fake()->imageUrl(),
+            'updated_at' => now()
+        ]);
+
+    if ($query)
+        echo 'Record Successfully Updated';
+});
+
+
 
 
 
