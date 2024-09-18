@@ -58,7 +58,7 @@
                     </li>
 
                     <li>
-                        <a href="{{ url('/page3') }}"><i class="fa fa-envelope"></i> <span class="nav-label">Page
+                        <a href="{{ url('/page3') }}"><i class="fa fa-paper-plane"></i> <span class="nav-label">Page
                                 3</span></a>
                     </li>
                     <li>

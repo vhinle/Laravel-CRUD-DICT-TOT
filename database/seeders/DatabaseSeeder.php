@@ -15,7 +15,11 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
+        # Movie Seeder
         $this->call(MovieSeeder::class);
+
+        #Book Seeder
+        $this->call(BookSeeder::class);
 
         // User::factory()->create([
         //     'name' => 'Test User',

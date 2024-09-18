@@ -64,3 +64,6 @@ class ImportDataFromCsv extends Migration
 
 # Run migration with seeder
 php artisan migrate:fresh --seed 
+
+# Create a new model with a migration, factory, and seeder
+php artisan make:model ModelName -mfs
