@@ -38,6 +38,17 @@ class MovieController extends Controller
 
     public function add_movie(Request $request)
     {
+        # Validation
+        $request->validate([
+            'category_id' => 'required|integer|exists:category,id',
+            'title' => 'required|string|max:255',
+            'decription' => 'required|string',
+            'star_rating' => 'required|numeric|min:1|max:5',
+            'director' => 'required|string|max:150',
+            'date_published' => 'required|date',
+            'picture' => 'required|image|mimes:jpeg,png,jpg,gif|max:1024',
+        ]);
+
         //Check image
         $filename = NULL;
         if ($request->file('picture')) {
@@ -82,8 +93,29 @@ class MovieController extends Controller
         $data = DB::table('movies')->where('id', $id)->get();
         return view('pages.edit-movie-form', compact('data', 'categories'));
     }
+
     public function edit_movie(Request $request, $id)
     {
+        # Validation
+        $request->validate([
+            'category_id' => 'required|integer|exists:category,id',
+            'title' => 'required|string|max:255',
+            'decription' => 'required|string',
+            'star_rating' => 'required|numeric|min:1|max:5',
+            'director' => 'required|string|max:150',
+            'date_published' => 'required|date',
+            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+
+        # Handle image upload
+        $filename = NULL;
+        if ($request->file('picture')) {
+            $file = $request->file('picture');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('_uploads'), $filename);
+        }
+
         $query = DB::table('movies')
             ->where('id', $id)
             ->update([
@@ -93,6 +125,7 @@ class MovieController extends Controller
                 'star_rating' => $request->input('star_rating'),
                 'director' => $request->input('director'),
                 'date_published' => $request->input('date_published'),
+                'picture' => $filename,
                 'updated_at' => now()
             ]);
 
