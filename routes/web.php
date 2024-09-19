@@ -34,3 +34,22 @@ Route::post('/add-book', [BookController::class, 'add_book'])->name('books.store
 Route::get('/delete-book/{id}', [BookController::class, 'delete_book'])->name('books.delete');
 Route::get('edit-form-book/{id}', [BookController::class, 'show_edit_form'])->name('books.edit');
 Route::post('edit-form-book/{id}', [BookController::class, 'edit_book'])->name('books.update');
+
+Route::get('/dummy-movies', function () {
+    $movies = [];
+    for ($i = 0; $i < 10; $i++) {
+        $movie = [
+            'category_id' => fake()->numberBetween(1, 3),
+            'title' => fake()->sentence(3),
+            'decription' => fake()->paragraph,
+            'star_rating' => fake()->numberBetween(1, 10),
+            'director' => fake()->name,
+            'date_published' => fake()->date,
+            'picture' => fake()->imageUrl,
+            'created_at' => now()
+        ];
+        DB::table('movies')->insert($movie);
+        $movies[] = $movie;
+    }
+    return "Done!";
+});

@@ -9,6 +9,18 @@
                 <div class="col-4">
                     <form action="{{ url('/edit-movie/' . $data[0]->id) }}" method="POST">
                         @csrf
+
+                        <div class="form-group">
+                            <label for="genre">Category</label>
+                            <select class="form-control" id="category_id" name="category_id" required>
+                                @foreach ($categories as $c)
+                                    <option value="{{ $c->id }}" @selected($c->id == $data[0]->category_id)>
+                                        {{ $c->category }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         <div class="form-group">
                             <label for="title">Title</label>
                             <input type="text" class="form-control" id="title" name="title" required

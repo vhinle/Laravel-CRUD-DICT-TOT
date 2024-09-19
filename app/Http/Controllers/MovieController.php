@@ -12,10 +12,22 @@ class MovieController extends Controller
     {
 
         $data = DB::table('movies')
-            ->join('category', 'movies.category_id', '=', 'category.id')
+            ->leftJoin('category', 'movies.category_id', '=', 'category.id')
             ->select('movies.*', 'category.category')
             ->get();
-        return view('pages.page1', compact('data'));
+
+        $actionCount = DB::table('movies')
+            ->where('category_id', 1)
+            ->count();
+        $loveStoryCount = DB::table('movies')
+            ->where('category_id', 2)
+            ->count();
+        $horrorCount = DB::table('movies')
+            ->where('category_id', 3)
+            ->count();
+
+
+        return view('pages.page1', compact('data', 'actionCount', 'loveStoryCount', 'horrorCount'));
     }
     public function show_add_form()
     {
@@ -66,14 +78,16 @@ class MovieController extends Controller
 
     public function show_edit_form($id)
     {
+        $categories = DB::table('category')->get();
         $data = DB::table('movies')->where('id', $id)->get();
-        return view('pages.edit-movie-form', compact('data'));
+        return view('pages.edit-movie-form', compact('data', 'categories'));
     }
     public function edit_movie(Request $request, $id)
     {
         $query = DB::table('movies')
             ->where('id', $id)
             ->update([
+                'category_id' => $request->input('category_id'),
                 'title' => $request->input('title'),
                 'decription' => $request->input('description'),
                 'star_rating' => $request->input('star_rating'),
