@@ -7,8 +7,18 @@
         <div class="animated fadeInRightBig">
             <div class="row">
                 <div class="col-4">
-                    <form action="{{ url('/add-movies') }}" method="POST">
+                    <form action="{{ url('/add-movie') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        <div class="form-group">
+                            <label for="genre">Category</label>
+                            <select class="form-control" id="category_id" name="category_id" required>
+                                @foreach ($categories as $c)
+                                    <option value="{{ $c->id }}">{{ $c->category }}</option>
+                                @endforeach
+
+                            </select>
+                        </div>
+
                         <div class="form-group">
                             <label for="title">Title</label>
                             <input type="text" class="form-control" id="title" name="title" required>
@@ -29,7 +39,11 @@
                             <input type="number" class="form-control" id="star_rating" name="star_rating" min="1"
                                 max="10" required>
                         </div>
-
+                        <div class="form-group">
+                            <label for="photo">Photo</label>
+                            <input type="file" class="form-control" id="picture" name="picture" accept="image/*"
+                                required>
+                        </div>
                         <div class="form-group">
                             <label for="date_published">Date Published</label>
                             <input type="date" class="form-control" id="date_published" name="date_published" required>

@@ -22,9 +22,11 @@
                     <tr>
                         <th>ID</th>
                         <th>TITLE</th>
+                        <th>CATEGORY</th>
                         <th>DESCRIPTION</th>
                         <th>RATING</th>
                         <th>PUBLISHED</th>
+                        <th>IMAGE</th>
                         <th>DIRECTOR</th>
                         <th>ACTION</th>
                     </tr>
@@ -34,9 +36,12 @@
                         <tr>
                             <td>{{ $row->id }}</td>
                             <td>{{ $row->title }}</td>
+                            <td>{{ $row->category }}</td>
                             <td>{{ $row->decription }}</td>
                             <td>{{ $row->star_rating }}</td>
+
                             <td>{{ \Carbon\Carbon::parse($row->date_published)->format('d M Y') }}</td>
+                            <td><img src="{{ asset('_uploads/' . $row->picture) }}" width="45"></td>
                             <td>{{ $row->director }}</td>
                             <td>
                                 <a href="{{ url('/edit-movie-form/' . $row->id) }}" class="btn btn-info"><i
