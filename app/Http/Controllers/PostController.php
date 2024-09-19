@@ -22,19 +22,14 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'title' => 'required|string|max:100',
             'story' => 'required|string',
         ]);
 
-        $post = new Post([
-            'title' => $request->input('title'),
-            'story' => $request->input('story'),
-        ]);
+        $post = Post::create($data);
 
-        $post->save();
-
-        return response()->json($post, 201);
+        return $post;
     }
 
     /**
@@ -42,7 +37,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return $post;
     }
 
     /**
@@ -50,7 +45,13 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required|string|max:100',
+            'story' => 'required|string',
+        ]);
+
+        $post->update($data);
+        return $post;
     }
 
     /**
@@ -58,6 +59,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return $post;
     }
 }
