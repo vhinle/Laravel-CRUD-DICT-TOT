@@ -13,4 +13,6 @@ Route::get('/', function () {
     return 'Hello';
 });
 
+
+# API route
 Route::apiResource('post', PostController::class);
