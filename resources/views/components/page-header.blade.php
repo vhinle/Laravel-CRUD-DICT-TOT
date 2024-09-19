@@ -10,9 +10,5 @@
             </li>
         </ol>
     </div>
-    <div class="col-sm-8">
-        <div class="title-action">
-            <x-action-button caption="{{ $btnCaption }}" />
-        </div>
-    </div>
+
 </div>

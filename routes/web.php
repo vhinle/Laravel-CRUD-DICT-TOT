@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\MovieController;
 
 Route::get('/', function () {
@@ -28,27 +29,28 @@ Route::get('/delete-movie/{id}', [MovieController::class, 'do_delete']);
 Route::get('/edit-movie-form/{id}', [MovieController::class, 'show_edit_form']);
 Route::post('/edit-movie/{id}', [MovieController::class, 'edit_movie']);
 
+
+
 // Route::get('/add-movie-form', function () {
 //     return view('pages.add-movie-form');
 // });
 
+// Route::post('/add-movies', function (Request $request) {
 
-Route::post('/add-movies', function (Request $request) {
+//     $query = DB::table('movies')
+//         ->insert([
+//             'title' => $request->input('title'),
+//             'decription' => $request->input('description'),
+//             'star_rating' => $request->input('star_rating'),
+//             'director' => $request->input('director'),
+//             'date_published' => $request->input('date_published'),
+//             'created_at' => now()
+//         ]);
 
-    $query = DB::table('movies')
-        ->insert([
-            'title' => $request->input('title'),
-            'decription' => $request->input('description'),
-            'star_rating' => $request->input('star_rating'),
-            'director' => $request->input('director'),
-            'date_published' => $request->input('date_published'),
-            'created_at' => now()
-        ]);
-
-    if ($query) {
-        return redirect(url('/page1'))->with('success', 'New Record Successfully Saved');
-    }
-});
+//     if ($query) {
+//         return redirect(url('/page1'))->with('success', 'New Record Successfully Saved');
+//     }
+// });
 // Route::get('/add-movies', function () {
 
 //     $query = DB::table('movies')
@@ -65,58 +67,63 @@ Route::post('/add-movies', function (Request $request) {
 //         echo 'Saved';
 // });
 
-Route::get('/delete-movie', function () {
+// Route::get('/delete-movie', function () {
 
-    $query = DB::table('movies')
-        ->where('id', 5)
-        ->delete();
+//     $query = DB::table('movies')
+//         ->where('id', 5)
+//         ->delete();
 
-    if ($query)
-        echo 'Record Deleted';
-});
+//     if ($query)
+//         echo 'Record Deleted';
+// });
 
-Route::get('/update-movie', function () {
+// Route::get('/update-movie', function () {
 
-    $query = DB::table('movies')
-        ->where('id', 1)
-        ->update([
-            'title' => 'Batman 4',
-            'decription' => 'Action, Suspense',
-            'star_rating' => 9.3,
-            'director' => "Warner Bros.",
-            'date_published' => '2024-01-02',
-            'updated_at' => now()
-        ]);
+//     $query = DB::table('movies')
+//         ->where('id', 1)
+//         ->update([
+//             'title' => 'Batman 4',
+//             'decription' => 'Action, Suspense',
+//             'star_rating' => 9.3,
+//             'director' => "Warner Bros.",
+//             'date_published' => '2024-01-02',
+//             'updated_at' => now()
+//         ]);
 
-    if ($query)
-        echo 'Saved';
-});
-
-
+//     if ($query)
+//         echo 'Saved';
+// });
 
 
 
-Route::get('/page2', function () {
-    $data = DB::table('books')->get();
-    return view('pages.page2', compact('data'));
-});
+// ================ BOOK ===============
 
-Route::get('/add-book', function () {
+Route::get('/page2', [BookController::class, 'index'])->name('books.index');
 
-    $query = DB::table('books')
-        ->insert([
-            'title' => fake()->sentence(),
-            'description' => fake()->text(),
-            'country_id' => fake()->numberBetween(1, 10),
-            'stocks' => fake()->numberBetween(1, 500),
-            'amount' => fake()->randomFloat(2, 1, 1000),
-            'photo' => fake()->imageUrl(),
-            'created_at' => now()
-        ]);
+Route::get('/add-book-form', [BookController::class, 'show_add_form'])->name('books.create');
+Route::post('/add-book', [BookController::class, 'add_book'])->name('books.store');
 
-    if ($query)
-        echo 'New Record Successfully Saved';
-});
+Route::get('/delete-book/{id}', [BookController::class, 'delete_book'])->name('books.delete');
+
+Route::get('edit-form-book/{id}', [BookController::class, 'show_edit_form'])->name('books.edit');
+Route::post('edit-form-book/{id}', [BookController::class, 'edit_book'])->name('books.update');
+
+// Route::get('/add-book', function () {
+
+//     $query = DB::table('books')
+//         ->insert([
+//             'title' => fake()->sentence(),
+//             'description' => fake()->text(),
+//             'country_id' => fake()->numberBetween(1, 10),
+//             'stocks' => fake()->numberBetween(1, 500),
+//             'amount' => fake()->randomFloat(2, 1, 1000),
+//             'photo' => fake()->imageUrl(),
+//             'created_at' => now()
+//         ]);
+
+//     if ($query)
+//         echo 'New Record Successfully Saved';
+// });
 
 Route::get('/update-book/{id}', function ($id) {
 

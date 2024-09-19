@@ -9,12 +9,13 @@
         <p class="alert alert-warning">Process Failed!</p>
     @endif
 
-    <x-page-header pageTitle="Page 1" btnCaption="Action Button Page 1" class="bg-white" />
+    <x-page-header pageTitle="Manage Movies" class="bg-white" />
 
     <div class="wrapper wrapper-content">
 
         <div class="row">
             <a href="{{ url('/add-movie-form') }}" class="btn btn-primary btn-lg">Add Movie</a>
+
 
             <table class="table table-bordered table-striped table-hover mt-2">
                 <thead>
@@ -39,15 +40,15 @@
                             <td>{{ $row->director }}</td>
                             <td>
                                 <a href="{{ url('/edit-movie-form/' . $row->id) }}" class="btn btn-info"><i
-                                        class="fa fa-edit"></i>
-                                    <a href="{{ url('/delete-movie/' . $row->id) }}" class="btn btn-danger"><i
-                                            class="fa fa-trash"></i>
-
+                                        class="fa fa-edit"></i></a>
+                                <a href="{{ url('/delete-movie/' . $row->id) }}" class="btn btn-danger"><i
+                                        class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+
         </div>
 
     </div>

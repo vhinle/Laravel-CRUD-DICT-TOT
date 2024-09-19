@@ -48,13 +48,13 @@
                     </li>
 
                     <li>
-                        <a href="{{ url('/page1') }}"><i class="fa fa-diamond"></i> <span class="nav-label">Page
-                                1</span></a>
+                        <a href="{{ url('/page1') }}"><i class="fa fa-video-camera"></i> <span
+                                class="nav-label">Movies</span></a>
                     </li>
 
                     <li>
-                        <a href="{{ url('/page2') }}"><i class="fa fa-envelope"></i> <span class="nav-label">Page
-                                2</span></a>
+                        <a href="{{ url('/page2') }}"><i class="fa fa-envelope"></i> <span
+                                class="nav-label">Books</span></a>
                     </li>
 
                     <li>

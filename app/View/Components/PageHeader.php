@@ -10,14 +10,14 @@ class PageHeader extends Component
 {
 
     public $pageTitle;
-    public $btnCaption;
+    //public $btnCaption;
     /**
      * Create a new component instance.
      */
-    public function __construct($pageTitle, $btnCaption)
+    public function __construct($pageTitle)
     {
         $this->pageTitle = $pageTitle;
-        $this->btnCaption = $btnCaption;
+        //$this->btnCaption = $btnCaption;
     }
 
     /**
