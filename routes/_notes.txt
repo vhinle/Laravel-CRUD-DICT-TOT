@@ -1,0 +1,7 @@
+# Install API
+
+php artisan install:api
+
+
+
+php artisan make
