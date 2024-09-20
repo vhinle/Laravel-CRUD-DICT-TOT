@@ -1,16 +1,73 @@
 @extends('layouts.app')
 
 @section('content')
-    <x-page-header pageTitle="Page 3" btnCaption="Action Button Page3" class="bg-white" />
+    <x-page-header pageTitle="Manage Posts" class="bg-white" />
 
     <div class="wrapper wrapper-content">
-        <div class="middle-box text-center animated fadeInRightBig">
-            <h3 class="font-bold">This is page content</h3>
-            <div class="error-desc">
-                You can create here any grid layout you want. And any variation layout you imagine:) Check out
-                main dashboard and other site. It use many different layout.
-                <br /><a href="index.html" class="btn btn-primary m-t">Dashboard</a>
+        <div class="animated fadeInRightBig">
+
+            <div class="row">
+                <div class="col-12">
+                    <!-- iBox -->
+                    <div class="ibox">
+
+                        <div class="ibox-title">
+                            <h2>All of all messages</h2>
+                        </div>
+
+                        <div class="ibox-content">
+                            <table class="table table-bordered table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>TITLE</th>
+                                        <th>POST</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- JQuery content here..-->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="ibox-footer">
+
+                        </div>
+
+                    </div>
+                    <!-- /iBox -->
+
+                </div>
             </div>
+
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: '{{ url('/api/posts') }}',
+                method: 'GET',
+                success: function(data) {
+                    //console.table(data); //show data in tabular form
+
+                    let tbody = $('table tbody');
+                    tbody.empty();
+                    data.forEach(function(post) {
+                        var row = '<tr>' +
+                            '<td>' + post.id + '</td>' +
+                            '<td>' + post.title + '</td>' +
+                            '<td>' + post.story + '</td>' +
+                            '</tr>';
+                        tbody.append(row);
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching posts:', error);
+                }
+            });
+        });
+    </script>
 @endsection

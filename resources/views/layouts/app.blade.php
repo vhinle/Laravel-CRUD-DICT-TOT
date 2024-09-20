@@ -225,7 +225,7 @@
     <script src="{{ url('js/inspinia.js') }}"></script>
     <script src="{{ url('js/plugins/pace/pace.min.js') }}"></script>
 
-
+    @yield('scripts')
 </body>
 
 </html>

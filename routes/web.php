@@ -35,6 +35,14 @@ Route::get('/delete-book/{id}', [BookController::class, 'delete_book'])->name('b
 Route::get('edit-form-book/{id}', [BookController::class, 'show_edit_form'])->name('books.edit');
 Route::post('edit-form-book/{id}', [BookController::class, 'edit_book'])->name('books.update');
 
+
+
+Route::get('/page3', function () {
+    return view('pages.page3');
+});
+
+
+
 Route::get('/dummy-movies', function () {
     $movies = [];
     for ($i = 0; $i < 10; $i++) {

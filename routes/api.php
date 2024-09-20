@@ -15,4 +15,4 @@ Route::get('/', function () {
 
 
 # API route
-Route::apiResource('post', PostController::class);
+Route::apiResource('posts', PostController::class);
