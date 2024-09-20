@@ -16,7 +16,7 @@
                         </div>
 
                         <div class="ibox-content">
-                            <table class="table table-bordered table-striped table-hover">
+                            <table class="table table-bordered table-striped table-hover" id="postTable">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -52,8 +52,7 @@
                 method: 'GET',
                 success: function(data) {
                     //console.table(data); //show data in tabular form
-
-                    let tbody = $('table tbody');
+                    let tbody = $('#postTable tbody');
                     tbody.empty();
                     data.forEach(function(post) {
                         var row = '<tr>' +
@@ -63,6 +62,18 @@
                             '</tr>';
                         tbody.append(row);
                     });
+
+
+                    // let tbody = $('table tbody');
+                    // tbody.empty();
+                    // data.forEach(function(post) {
+                    //     var row = '<tr>' +
+                    //         '<td>' + post.id + '</td>' +
+                    //         '<td>' + post.title + '</td>' +
+                    //         '<td>' + post.story + '</td>' +
+                    //         '</tr>';
+                    //     tbody.append(row);
+                    // });
                 },
                 error: function(xhr, status, error) {
                     console.error('Error fetching posts:', error);
