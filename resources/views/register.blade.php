@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>INSPINIA | Login</title>
+    <title>INSPINIA | Register</title>
 
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('font-awesome/css/font-awesome.css') }}" rel="stylesheet">
@@ -22,7 +22,8 @@
 
             <h3>REGISTER NOW</h3>
 
-            <form class="m-t" role="form" action="index.html">
+            <form class="m-t" role="form" action="{{ url('/do_register') }}" method="post">
+                @csrf
                 <div class="form-group">
                     <input type="text" id="name" name="name" class="form-control" placeholder="Name"
                         required="">
@@ -32,7 +33,7 @@
                         required="">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Password" required="">
+                    <input type="password" name="password" class="form-control" placeholder="Password" required="">
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">Register</button>
                 <a class="btn btn-sm btn-white btn-block" href="{{ url('/') }}">Login to my account</a>

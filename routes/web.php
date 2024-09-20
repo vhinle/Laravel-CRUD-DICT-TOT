@@ -4,8 +4,10 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\MovieController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -13,11 +15,15 @@ Route::get('/', function () {
 Route::get('/register', function () {
     return view('register');
 });
+Route::post('/do_register', [AuthController::class, 'do_register']);
+Route::post('/do_login', [AuthController::class, 'do_login']);
 
 
 Route::get('/dashboard', function () {
     return view('pages.dashboard');
 });
+
+
 
 
 // ================ MOVIEWS ===============

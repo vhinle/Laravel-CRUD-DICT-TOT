@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>INSPINIA | Login</title>
+    <title>System | Login</title>
 
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('font-awesome/css/font-awesome.css') }}" rel="stylesheet">
@@ -23,12 +23,13 @@
             <h3>Login Page</h3>
 
             <p>Login in. To see it in action.</p>
-            <form class="m-t" role="form" action="index.html">
+            <form class="m-t" role="form" action="{{ url('/do_login') }}" method="post">
+                @csrf
                 <div class="form-group">
-                    <input type="email" class="form-control" placeholder="Email" required="">
+                    <input type="email" name="email" class="form-control" placeholder="Email" required="">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Password" required="">
+                    <input type="password" name="password" class="form-control" placeholder="Password" required="">
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
 
