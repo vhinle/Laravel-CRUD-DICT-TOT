@@ -10,11 +10,15 @@ use App\Http\Controllers\MovieController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/register', function () {
+    return view('register');
+});
 
 
 Route::get('/dashboard', function () {
     return view('pages.dashboard');
 });
+
 
 // ================ MOVIEWS ===============
 

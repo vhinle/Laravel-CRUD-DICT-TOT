@@ -13,6 +13,8 @@
     <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+
 </head>
 
 <body class="">
@@ -229,3 +231,24 @@
 </body>
 
 </html>
+<!-- PUSHER-->
+<script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+<!-- TOASTER -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<!-- PUSHER-->
+<script>
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('c3386d14673f4b2cc85b', {
+        cluster: 'ap1'
+    });
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+        toastr.info(data.msg);
+        //console.log(JSON.stringify(data));
+        //alert(JSON.stringify(data));
+    });
+</script>

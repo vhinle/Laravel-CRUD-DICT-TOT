@@ -20,21 +20,22 @@
     <div class="middle-box text-center loginscreen animated fadeInDown">
         <div>
 
-            <h3>Login Page</h3>
+            <h3>REGISTER NOW</h3>
 
-            <p>Login in. To see it in action.</p>
             <form class="m-t" role="form" action="index.html">
                 <div class="form-group">
-                    <input type="email" class="form-control" placeholder="Email" required="">
+                    <input type="text" id="name" name="name" class="form-control" placeholder="Name"
+                        required="">
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" name="email" class="form-control" placeholder="Email"
+                        required="">
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" placeholder="Password" required="">
                 </div>
-                <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
-
-
-                <p class="text-muted text-center"><small>Do not have an account?</small></p>
-                <a class="btn btn-sm btn-white btn-block" href="{{ url('/register') }}">Create an account</a>
+                <button type="submit" class="btn btn-primary block full-width m-b">Register</button>
+                <a class="btn btn-sm btn-white btn-block" href="{{ url('/') }}">Login to my account</a>
             </form>
 
         </div>

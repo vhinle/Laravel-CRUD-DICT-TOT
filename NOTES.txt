@@ -1,0 +1,41 @@
+PUSHER
+
+
+
+Register
+
+Create App
+App Name: laravel-proj <any name>
+choose:
+  Singgapore
+
+
+Add the ff script into main layout
+<script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+  <script>
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('c3386d14673f4b2cc85b', {
+      cluster: 'ap1'
+    });
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+      alert(JSON.stringify(data));
+    });
+  </script>
+
+
+Copy config from Pusher and Add the following to .env
+# PUSHER
+PUSHER_APP_ID=1867935
+PUSHER_APP_KEY=c3386d14673f4b2cc85b
+PUSHER_APP_SECRET=64285034536acd3ef427
+PUSHER_APP_CLUSTER=ap1
+
+
+
+Create event in laravel
+>php artisan make:event CustomMessageEvent

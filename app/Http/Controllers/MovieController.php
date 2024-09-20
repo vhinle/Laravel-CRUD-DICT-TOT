@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
+use App\Events\CustomMessageEvent; //for pusher integration
 
 class MovieController extends Controller
 {
@@ -27,6 +28,7 @@ class MovieController extends Controller
             ->where('category_id', 3)
             ->count();
 
+        //event(new CustomMessageEvent("Someone visited your movie listing page"));
 
         return view('pages.page1', compact('data', 'actionCount', 'loveStoryCount', 'horrorCount'));
     }
