@@ -85,6 +85,7 @@
 
 @section('scripts')
     <script>
+        //---Javascript functions----
         //call function
         loadData();
 
