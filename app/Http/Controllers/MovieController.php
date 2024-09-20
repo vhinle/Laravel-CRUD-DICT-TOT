@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 
 class MovieController extends Controller
@@ -132,5 +133,21 @@ class MovieController extends Controller
         if ($query) {
             return redirect(url('/page1'))->with('success', 'Record Successfully Updated');
         }
+    }
+
+    public function do_print()
+    {
+        $data = DB::table('movies')
+            ->leftJoin('category', 'movies.category_id', '=', 'category.id')
+            ->select('movies.*', 'category.category')
+            ->get();
+
+        $pdf = Pdf::loadView('pages.print', compact('data'));
+        $pdf->set_paper('A4', 'landscape');
+        $pdf->output();
+        return $pdf->stream();
+        //return $pdf->download('movie-listings.pdf');
+
+        //return view('pages.print', compact('data'));
     }
 }

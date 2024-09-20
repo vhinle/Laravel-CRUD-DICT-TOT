@@ -18,9 +18,9 @@
                 <a href="{{ url('/add-movie-form') }}" class="btn btn-primary btn-lg">Add Movie</a>
                 <hr>
                 <!--
-                        https://quickchart.io
-                        https://quickchart.io/documentation/migrating-from-google-image-charts/
-                    -->
+                                            https://quickchart.io
+                                            https://quickchart.io/documentation/migrating-from-google-image-charts/
+                                        -->
                 <img src="https://quickchart.io/chart?cht=p3&chs=350x200&chd=t:{{ $horrorCount }},{{ $loveStoryCount }},{{ $actionCount }}&chl=Horror|Love Story|Drama"
                     width="100%">
             </div>
@@ -61,7 +61,8 @@
                         @endforeach
                     </tbody>
                 </table>
-
+                <a href="{{ url('/print') }}" target="_blank" class="btn btn-secondary"><i class="fa fa-print"></i>
+                    Print</a>
             </div>
         </div>
 

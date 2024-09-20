@@ -24,7 +24,7 @@ Route::post('/add-movie', [MovieController::class, 'add_movie']);
 Route::get('/delete-movie/{id}', [MovieController::class, 'do_delete']);
 Route::get('/edit-movie-form/{id}', [MovieController::class, 'show_edit_form']);
 Route::post('/edit-movie/{id}', [MovieController::class, 'edit_movie']);
-
+Route::get('/print', [MovieController::class, 'do_print']);
 // ================ BOOK ===============
 
 Route::get('/page2', [BookController::class, 'index'])->name('books.index');
